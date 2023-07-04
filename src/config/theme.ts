@@ -4,7 +4,7 @@ import { theme as twinTheme } from 'twin.macro';
 export const defaultGradient = (
   toRight = true,
   from = twinTheme`colors.orange.DEFAULT`,
-  to = twinTheme`colors.pink.DEFAULT`
+  to = twinTheme`colors.navyblue.DEFAULT`
 ) => {
   const direction = toRight ? `to right` : `to left`;
   return `linear-gradient(${direction},${from} 45%, ${to} 100%)`;

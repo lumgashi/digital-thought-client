@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "yarn lint --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
@@ -61,6 +63,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-unused-imports": "^2.0.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.8",
     "twin.macro": "^3.3.1"
   }
