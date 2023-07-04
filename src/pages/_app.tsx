@@ -13,6 +13,7 @@ import createEmotionCache from '@/utils/createEmotionCache';
 import StylesGlobal from '@/components/GlobalStyles';
 import Api from '@/lib/api';
 import theme from '@/config/theme';
+import { NotificationProvider } from '@/providers/NotificationProvider';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -29,7 +30,9 @@ export default function App(props: DtAppProps) {
         <CacheProvider value={emotionCache}>
           <MuiThemeProvider theme={theme}>
             <StylesGlobal />
-            <Component {...pageProps} />
+            <NotificationProvider>
+              <Component {...pageProps} />
+            </NotificationProvider>
           </MuiThemeProvider>
         </CacheProvider>
       </SWRConfig>
