@@ -1,5 +1,5 @@
 import { CssBaseline, GlobalStyles } from '@mui/material';
-import tw, { theme, GlobalStyles as BaseStyles } from 'twin.macro';
+import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 
 const CustomStyles = (
   <GlobalStyles
