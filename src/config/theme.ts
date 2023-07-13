@@ -28,17 +28,17 @@ declare module '@mui/material/Alert' {
 
 const appTheme = createTheme({
   palette: {
-    // orange
-    primary: {
-      main: twinTheme`colors.orange.DEFAULT`,
-      light: twinTheme`colors.orange.300`,
-      dark: twinTheme`colors.orange.800`,
-    },
     // navyblue
-    secondary: {
+    primary: {
       main: twinTheme`colors.navyblue.DEFAULT`,
       light: twinTheme`colors.navyblue.300`,
       dark: twinTheme`colors.navyblue.800`,
+    },
+    // orange
+    secondary: {
+      main: twinTheme`colors.orange.DEFAULT`,
+      light: twinTheme`colors.orange.300`,
+      dark: twinTheme`colors.orange.800`,
     },
     grey: {
       300: twinTheme`colors.gray.300`,
