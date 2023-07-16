@@ -1,14 +1,5 @@
-import { createTheme, Theme, Components } from '@mui/material';
+import { createTheme, Theme, Components, PaletteMode } from '@mui/material';
 import { theme as twinTheme } from 'twin.macro';
-
-export const defaultGradient = (
-  toRight = true,
-  from = twinTheme`colors.orange.DEFAULT`,
-  to = twinTheme`colors.navyblue.DEFAULT`
-) => {
-  const direction = toRight ? `to right` : `to left`;
-  return `linear-gradient(${direction},${from} 45%, ${to} 100%)`;
-};
 
 declare module '@mui/material/Button' {
   interface ButtonPropsVariantOverrides {
@@ -26,33 +17,52 @@ declare module '@mui/material/Alert' {
   }
 }
 
-const appTheme = createTheme({
+export const getDesignTokens: any = (mode: PaletteMode = 'light') => ({
   palette: {
-    // navyblue
-    primary: {
-      main: twinTheme`colors.navyblue.DEFAULT`,
-      light: twinTheme`colors.navyblue.300`,
-      dark: twinTheme`colors.navyblue.800`,
-    },
-    // orange
-    secondary: {
-      main: twinTheme`colors.orange.DEFAULT`,
-      light: twinTheme`colors.orange.300`,
-      dark: twinTheme`colors.orange.800`,
-    },
-    grey: {
-      300: twinTheme`colors.gray.300`,
-      400: twinTheme`colors.gray.400`,
-      500: twinTheme`colors.gray.500`,
-      600: twinTheme`colors.gray.600`,
-    },
-    text: {
-      primary: '#575757',
-      secondary: '#767676',
-    },
-    background: {
-      default: '#F3F4F6',
-    },
+    mode,
+    ...(mode === 'light'
+      ? {
+          primary: {
+            main: twinTheme`colors.gray.200`,
+            light: twinTheme`colors.gray.100`,
+            dark: twinTheme`colors.gray.300`,
+          },
+          secondary: {
+            main: twinTheme`colors.gray.500`,
+            light: twinTheme`colors.gray.400`,
+            dark: twinTheme`colors.gray.600`
+          },
+          divider: twinTheme`colors.neutral.300`,
+          text: {
+            primary: twinTheme`colors.gray.600`,
+            secondary: twinTheme`colors.gray.800`,
+          },
+          background: {
+            default: twinTheme`colors.gray.200`,
+            paper: twinTheme`colors.gray.200`
+          },
+        }
+      : {
+        primary: {
+          main: twinTheme`colors.neutral.200`,
+          light: twinTheme`colors.neutral.100`,
+          dark: twinTheme`colors.neutral.300`,
+        },
+        secondary: {
+          main: twinTheme`colors.neutral.500`,
+          light: twinTheme`colors.neutral.400`,
+          dark: twinTheme`colors.neutral.600`,
+        },
+        divider: twinTheme`colors.neutral.100`,
+        text: {
+          primary: twinTheme`colors.gray.100`,
+          secondary: twinTheme`colors.gray.300`,
+        },
+        background: {
+          default: twinTheme`colors.neutral.DEFAULT`,
+          paper: twinTheme`colors.neutral.DEFAULT`
+        },
+        }),
   },
 
   typography: {
@@ -121,11 +131,13 @@ const appTheme = createTheme({
     },
   },
   shape: {
-    borderRadius: 20,
+    borderRadius: 5,
   },
 });
 
-const overrides = (theme: Theme): Components => ({
+export const appTheme = createTheme({});
+
+export const overrides = (theme: Theme): Components => ({
   MuiTypography: {
     defaultProps: {
       color: 'textPrimary',
@@ -136,191 +148,103 @@ const overrides = (theme: Theme): Components => ({
       variant: 'outlined',
     },
   },
-
   MuiButton: {
-    defaultProps: {
-      disableFocusRipple: true,
+  defaultProps: {
       disableElevation: true,
-      variant: 'contained',
+      variant: 'contained'
     },
-    variants: [
-      {
-        props: { variant: 'buttonWhite' },
-        style: {
-          color: theme.palette.primary.main,
-          backgroundColor: theme.palette.common.white,
-          '&:hover': {
-            opacity: 0.8,
-            backgroundColor: theme.palette.common.white,
-          },
-          '&:active': {
-            opacity: 0.6,
-            backgroundColor: theme.palette.common.white,
-          },
-          '&:focus': {
-            outline: 'none',
-            backgroundColor: theme.palette.common.white,
-          },
-          '&.Mui-disabled': {
-            opacity: 0.2,
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-      },
-      {
-        props: { variant: 'buttonLight' },
-        style: {
-          color: theme.palette.common.white,
-          backgroundColor: '#f39e69',
-          '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#f39e69',
-          },
-          '&:active': {
-            opacity: 0.6,
-            backgroundColor: '#f39e69',
-          },
-          '&:focus': {
-            outline: 'none',
-            backgroundColor: '#f39e69',
-          },
-          '&.Mui-disabled': {
-            opacity: 0.2,
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-      },
-      {
-        props: { variant: 'buttonSuccess' },
-        style: {
-          color: theme.palette.common.white,
-          backgroundImage: 'none',
-          backgroundColor: '#87C735',
-          '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#87C735',
-          },
-          '&:active': {
-            opacity: 0.6,
-            backgroundColor: '#87C735',
-          },
-          '&:focus': {
-            outline: 'none',
-            backgroundColor: '#87C735',
-          },
-          '&.Mui-disabled': {
-            opacity: 0.2,
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-      },
-      {
-        props: { variant: 'buttonTransparent' },
-        style: {
-          color: theme.palette.common.white,
-          backgroundColor: '#ffffff77',
-          '&:hover': {
-            opacity: 0.8,
-            backgroundColor: '#ffffff77',
-          },
-          '&:active': {
-            opacity: 0.6,
-            backgroundColor: '#ffffff77',
-          },
-          '&:focus': {
-            outline: 'none',
-            backgroundColor: '#ffffff77',
-          },
-          '&.Mui-disabled': {
-            opacity: 0.2,
-            color: theme.palette.primary.main,
-            backgroundColor: theme.palette.common.white,
-          },
-        },
-      },
-    ],
     styleOverrides: {
       root: {
-        padding: theme.spacing(0.5, 2),
         transition: 'opacity 250ms ease-in-out',
         fontWeight: theme.typography.fontWeightMedium,
       },
       contained: {
         borderRadius: twinTheme`borderRadius.full`,
-        color: twinTheme`colors.white`,
-        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.text.secondary,
+        backgroundColor: theme.palette.secondary.light,
         '&:hover': {
-          opacity: 0.8,
-          backgroundColor: theme.palette.primary.main,
-        },
-        '&:active': {
-          opacity: 0.6,
-          backgroundColor: theme.palette.primary.main,
-        },
-        '&:focus': {
-          outline: 'none',
-          backgroundColor: theme.palette.primary.main,
-        },
-        '&.Mui-disabled': {
-          opacity: 0.2,
-          color: twinTheme`colors.white`,
-          backgroundColor: theme.palette.primary.main,
-        },
+          opacity: 0.7,
+          backgroundColor: theme.palette.secondary.light,
+        }
       },
-      containedPrimary: {
-        color: twinTheme`colors.white`,
-        backgroundImage: defaultGradient(),
-        '&:focus': {
-          outline: 'none',
-          borderImageSlice: 1,
-          borderImageSource: defaultGradient(false),
-        },
-        '&.Mui-disabled': {
-          opacity: 0.2,
-          color: twinTheme`colors.white`,
-          backgroundImage: defaultGradient(),
-        },
-      },
-      containedSecondary: {
-        color: twinTheme`colors.white`,
-        background: theme.palette.secondary.main,
+      outlined: {
+        borderRadius: twinTheme`borderRadius.full`,
+        color: theme.palette.text.secondary,
+        backgroundColor: 'inherit',
+        border: `2px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
         '&:hover': {
-          opacity: 0.8,
-          backgroundColor: theme.palette.secondary.main,
-        },
-        '&:active': {
-          opacity: 0.6,
-          backgroundColor: theme.palette.secondary.main,
-        },
-        '&:focus': {
-          outline: 'none',
-          backgroundColor: theme.palette.secondary.main,
-        },
-        '&.Mui-disabled': {
-          opacity: 0.2,
-          color: twinTheme`colors.white`,
-          backgroundColor: theme.palette.secondary.main,
-        },
-      },
-      containedSizeSmall: {
-        padding: theme.spacing(0.5, 1.5),
-        fontSize: twinTheme`fontSize.sm`,
-      },
-      textSizeSmall: {
-        padding: theme.spacing(0.5, 1.5),
+          opacity: 0.7,
+          backgroundColor: 'inherit',
+          border: `2px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
+        }
       },
       text: {
-        color: theme.palette.secondary.main,
-        fontSize: twinTheme`fontSize.sm`,
-        lineHeight: twinTheme`lineHeight.7`,
-        fontWeight: twinTheme`fontWeight.bold`,
+        borderRadius: twinTheme`borderRadius.full`,
+        color: theme.palette.text.secondary,
+        backgroundColor: 'inherit',
+        '&:hover': {
+          opacity: 0.7,
+          backgroundColor: 'inherit',
+        }
+      }
+    }
+  },
+  MuiIconButton: {
+    styleOverrides: {
+      root: {
+        backgroundColor: theme.palette.primary.dark,
+      }
+    }
+  },
+  MuiRadio: {
+    styleOverrides: {
+      root: {
+        '&.Mui-checked': {
+          color: theme.palette.text.primary
+        }
+      }
+    }
+  },
+  MuiAlert: {
+    variants: [
+      {
+        props: { variant: 'primary' },
+        style: {
+          color: theme.palette.text.primary,
+          backgroundColor: twinTheme`colors.neutral.DEFAULT`,
+        },
       },
-      sizeSmall: {
-        fontSize: twinTheme`fontSize.sm`,
-        fontWeight: twinTheme`fontWeight.bold`,
+      {
+        props: { variant: 'secondary' },
+        style: {
+          color: theme.palette.grey[300],
+          backgroundColor: twinTheme`colors.neutral.500`,
+          borderRadius: twinTheme`borderRadius.md`,
+          boxShadow: theme.shadows[8],
+        },
+      },
+    ],
+    styleOverrides: {
+      root: {
+        alignItems: 'center',
+        '& .MuiButtonBase-root': {
+          backgroundColor: twinTheme`colors.neutral.500`,
+        }
+      },
+      standardSuccess: {
+        color: theme.palette.grey[800],
+      },
+      standardInfo: {
+        color: theme.palette.grey[800],
+      },
+      standardWarning: {
+        color: theme.palette.grey[800],
+      },
+      standardError: {
+        color: theme.palette.grey[800],
+      },
+      action: {
+        paddingTop: 0,
       },
     },
   },
@@ -328,5 +252,6 @@ const overrides = (theme: Theme): Components => ({
 
 export default createTheme({
   ...appTheme,
+  ...getDesignTokens,
   components: overrides(appTheme),
 });
