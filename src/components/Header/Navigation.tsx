@@ -25,7 +25,7 @@ export default function Navigation() {
   const { colorMode } = useColorMode();
 
   return (
-    <nav tw="text-white uppercase text-opacity-0 font-bold text-sm ml-0 lg:(ml-4 mt-0) space-x-3">
+    <nav tw="text-white uppercase text-opacity-0 font-bold text-base ml-0 lg:(ml-4 mt-0) space-x-3">
       {navigationItems.map((item) => (
         <NavLink
           key={item.id}
