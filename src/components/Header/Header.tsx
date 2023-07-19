@@ -1,10 +1,12 @@
-import { Button, Container, Grid, Toolbar, useMediaQuery } from '@mui/material';
+import { Container, Grid, Toolbar, useMediaQuery } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import PersonIcon from '@mui/icons-material/Person';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import theme from '@/config/theme';
 import CustomLink from '@/components/CustomLink';
+
+import LinkButton from '../LinkButton';
 
 import MobileHeader from './MobileHeader';
 import Navigation from './Navigation';
@@ -46,10 +48,12 @@ export default function Header() {
                 <AccountMenu />
 
                 <div tw="flex flex-row items-center space-x-2">
-                  <Button endIcon={<PersonIcon />}>LogIn</Button>
-                  <Button variant="outlined" endIcon={<PersonAddIcon />}>
+                  <LinkButton href="/login" endIcon={<PersonIcon />}>
+                    Login
+                  </LinkButton>
+                  <LinkButton href="/signup" variant="outlined" endIcon={<PersonAddIcon />}>
                     Sign up
-                  </Button>
+                  </LinkButton>
                 </div>
               </div>
             </div>
