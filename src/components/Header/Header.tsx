@@ -28,7 +28,7 @@ export default function Header() {
               theme.palette.mode === 'dark' ? theme.palette.primary.light : 'inherit',
           }}
         >
-          <Container maxWidth="xl">
+          <Container maxWidth="lg" disableGutters>
             <div tw="flex flex-row justify-between items-center">
               <div tw="flex flex-row items-end">
                 <Grid container spacing={2}>
