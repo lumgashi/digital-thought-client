@@ -17,8 +17,8 @@ export default function Footer() {
               : (twinTheme`colors.gray.300` as string),
         }}
       >
-        <Container maxWidth="lg">
-          <div tw="mx-auto py-4 px-4 sm:px-6 lg:py-16 lg:px-8">
+        <Container maxWidth="lg" disableGutters>
+          <div tw="mx-auto py-4 px-4 sm:px-6 lg:py-16 lg:px-0">
             <div tw="flex flex-col space-y-4">
               <div tw="flex flex-row justify-between">
                 <Typography variant="h3">digitalthought.com</Typography>
