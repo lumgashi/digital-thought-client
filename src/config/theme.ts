@@ -32,7 +32,7 @@ export const getDesignTokens: any = (mode: PaletteMode = 'light') => ({
             light: twinTheme`colors.gray.400`,
             dark: twinTheme`colors.gray.600`
           },
-          divider: twinTheme`colors.neutral.300`,
+          divider: twinTheme`colors.gray.300`,
           text: {
             primary: twinTheme`colors.gray.600`,
             secondary: twinTheme`colors.gray.800`,
@@ -53,7 +53,7 @@ export const getDesignTokens: any = (mode: PaletteMode = 'light') => ({
           light: twinTheme`colors.neutral.400`,
           dark: twinTheme`colors.neutral.600`,
         },
-        divider: twinTheme`colors.neutral.100`,
+        divider: twinTheme`colors.neutral.300`,
         text: {
           primary: twinTheme`colors.gray.100`,
           secondary: twinTheme`colors.gray.300`,
@@ -155,35 +155,36 @@ export const overrides = (theme: Theme): Components => ({
     },
     styleOverrides: {
       root: {
+        padding: theme.spacing(0.5, 2),
         transition: 'opacity 250ms ease-in-out',
         fontWeight: theme.typography.fontWeightMedium,
       },
       contained: {
         borderRadius: twinTheme`borderRadius.full`,
-        color: theme.palette.text.secondary,
-        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.text.primary,
+        backgroundColor: theme.palette.primary.dark,
         '&:hover': {
-          opacity: 0.7,
-          backgroundColor: theme.palette.secondary.light,
+          opacity: 0.8,
+          backgroundColor: theme.palette.primary.dark,
         }
       },
       outlined: {
         borderRadius: twinTheme`borderRadius.full`,
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
         backgroundColor: 'inherit',
-        border: `2px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
+        border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
         '&:hover': {
-          opacity: 0.7,
+          opacity: 0.8,
           backgroundColor: 'inherit',
-          border: `2px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
+          border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
         }
       },
       text: {
         borderRadius: twinTheme`borderRadius.full`,
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
         backgroundColor: 'inherit',
         '&:hover': {
-          opacity: 0.7,
+          opacity: 0.8,
           backgroundColor: 'inherit',
         }
       }

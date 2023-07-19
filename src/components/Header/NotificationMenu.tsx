@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Badge,
-  Box,
   Divider,
   IconButton,
   ListSubheader,
@@ -42,39 +41,51 @@ export default function NotificationMenu() {
 
   return (
     <>
-      <IconButton sx={{ borderRadius: '100%' }} onClick={handleOpen}>
-        <Badge color="primary" variant="dot">
-          <NotificationsNoneIcon />
-        </Badge>
-      </IconButton>
+      <Tooltip title="Notifications" arrow>
+        <IconButton
+          sx={{
+            borderRadius: '100%',
+            '&.MuiIconButton-root': {
+              backgroundColor: 'inherit',
+            },
+          }}
+          onClick={handleOpen}
+        >
+          <Badge color="error" variant="dot">
+            <NotificationsNoneIcon fontSize="small" />
+          </Badge>
+        </IconButton>
+      </Tooltip>
 
-      <Menu
-        sx={{ mt: '40px', '& .MuiList-root': { maxWidth: 350, maxHeight: 450, padding: 1.5 } }}
-        id="menu-appbar"
-        anchorEl={anchorElNotification}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElNotification)}
-        onClose={handleClose}
-      >
-        <ListSubheader tw="uppercase">Notifications</ListSubheader>
-        <Divider tw="my-2" />
-        {notifications.map((notification) => (
-          <MenuItem key={notification} onClick={handleClose} tw="flex flex-row justify-between">
-            <Typography textAlign="center" variant="body1" tw="line-clamp-1 mr-4">
-              {notification}
-            </Typography>
-            <Badge color="secondary" variant="dot" />
-          </MenuItem>
-        ))}
-      </Menu>
+      <Scrollbar>
+        <Menu
+          sx={{ mt: '40px', '& .MuiList-root': { maxWidth: 350, maxHeight: 450, padding: 1.5 } }}
+          id="menu-appbar"
+          anchorEl={anchorElNotification}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElNotification)}
+          onClose={handleClose}
+        >
+          <ListSubheader tw="uppercase">Notifications</ListSubheader>
+          <Divider tw="my-2" />
+          {notifications.map((notification, index) => (
+            <MenuItem key={index} onClick={handleClose} tw="flex flex-row justify-between">
+              <Typography textAlign="center" variant="body1" tw="line-clamp-1 mr-4">
+                {notification}
+              </Typography>
+              <Badge color="secondary" variant="dot" />
+            </MenuItem>
+          ))}
+        </Menu>
+      </Scrollbar>
     </>
   );
 }

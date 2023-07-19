@@ -5,7 +5,6 @@ import {
   DialogContent,
   Grid,
   List,
-  ListItem,
   MenuItem,
   Radio,
   Typography,
@@ -45,7 +44,7 @@ export default function ColorModeDialog({ open, onClose, onSuccess }: Props) {
   }, [colorMode]);
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm">
+    <Dialog open={open} onClose={onClose} maxWidth="xs">
       <div tw="flex flex-col overflow-auto">
         <CustomDialogTitle
           id="change-temperature-unit-dialog"
@@ -86,9 +85,7 @@ export default function ColorModeDialog({ open, onClose, onSuccess }: Props) {
             </Grid>
 
             <Grid item container xs={12} justifyContent="flex-end">
-              <Button onClick={confirmColorModeChange} variant="outlined">
-                OK
-              </Button>
+              <Button onClick={confirmColorModeChange}>OK</Button>
             </Grid>
           </Grid>
         </DialogContent>
