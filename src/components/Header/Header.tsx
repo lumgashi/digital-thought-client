@@ -5,8 +5,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 import theme from '@/config/theme';
 import CustomLink from '@/components/CustomLink';
-
-import LinkButton from '../LinkButton';
+import LinkButton from '@/components/LinkButton';
 
 import MobileHeader from './MobileHeader';
 import Navigation from './Navigation';
