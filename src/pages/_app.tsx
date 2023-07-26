@@ -14,6 +14,7 @@ import StylesGlobal from '@/components/GlobalStyles';
 import Api from '@/lib/api';
 import { NotificationProvider } from '@/providers/NotificationProvider';
 import { ColorModeProvider } from '@/providers/ColorModeProvider';
+import { AuthProvider } from '@/providers/AuthProvider';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -31,7 +32,9 @@ export default function App(props: DtAppProps) {
           <ColorModeProvider>
             <StylesGlobal />
             <NotificationProvider>
-              <Component {...pageProps} />
+              <AuthProvider>
+                <Component {...pageProps} />
+              </AuthProvider>
             </NotificationProvider>
           </ColorModeProvider>
         </CacheProvider>
