@@ -19,7 +19,7 @@ export default function LinkButton({
 }: React.PropsWithChildren<Props>) {
   return (
     <Link href={href} passHref>
-      <Button {...(props as any)} component="a" css={css} className={className}>
+      <Button {...(props as any)} css={css} className={className}>
         {children}
       </Button>
     </Link>
