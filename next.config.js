@@ -7,6 +7,12 @@ const nextConfig = {
 
     return config;
   },
+  serverRuntimeConfig: {
+    backendUrl: process.env.BACKEND_URL,
+  },
+  env: {
+    BUILD_ENV: process.env.BUILD_ENV,
+  },
 }
 
 module.exports = nextConfig
