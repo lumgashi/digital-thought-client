@@ -9,7 +9,7 @@ const baseUrl = serverRuntimeConfig.backendUrl;
 const proxyMiddleware = (token?: string) =>
   middleware(
     createProxyMiddleware({
-      pathRewrite: { [`^/api`]: '' },
+      // pathRewrite: { [`^/api`]: '' },
       logLevel: process.env.NODE_ENV === 'production' ? 'debug' : 'warn',
       target: baseUrl,
       changeOrigin: true,
