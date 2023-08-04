@@ -6,7 +6,7 @@ export type IronHandler = (req: NextApiRequest, res: NextApiResponse) => void | 
 
 declare module 'iron-session' {
   interface IronSessionData {
-    token: string;
+    accessToken: string;
     user?: any;
   }
 }
