@@ -1,5 +1,5 @@
 import * as React from 'react';
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 
 import Api from '@/lib/api';
 import { User, ProfileTypes } from '@/interfaces/user.interface';
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       const profileFromStorage = window.localStorage.getItem('userProfile') ?? undefined;
 
       if (profileFromStorage) {
-        setUserProfile(profileFromStorage as ProfileTypes);
+        setUserProfile((profileFromStorage as ProfileTypes) ?? 4);
       } else {
         setUserProfile(user?.profile);
       }
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const logout = async (): Promise<void> => {
     try {
       const response = await Api.delete('auth');
-      mutate(response, false);
+      mutateUser(response, false);
       setUserProfile(undefined);
       window.localStorage.removeItem('userProfile');
 
