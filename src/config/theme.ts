@@ -30,7 +30,7 @@ export const getDesignTokens: any = (mode: PaletteMode = 'light') => ({
           secondary: {
             main: twinTheme`colors.gray.500`,
             light: twinTheme`colors.gray.400`,
-            dark: twinTheme`colors.gray.600`
+            dark: twinTheme`colors.gray.600`,
           },
           divider: twinTheme`colors.gray.300`,
           text: {
@@ -38,30 +38,30 @@ export const getDesignTokens: any = (mode: PaletteMode = 'light') => ({
             secondary: twinTheme`colors.gray.800`,
           },
           background: {
-            default: twinTheme`colors.gray.200`,
-            paper: twinTheme`colors.gray.200`
+            default: twinTheme`colors.gray.100`,
+            paper: twinTheme`colors.gray.200`,
           },
         }
       : {
-        primary: {
-          main: twinTheme`colors.neutral.200`,
-          light: twinTheme`colors.neutral.100`,
-          dark: twinTheme`colors.neutral.300`,
-        },
-        secondary: {
-          main: twinTheme`colors.neutral.500`,
-          light: twinTheme`colors.neutral.400`,
-          dark: twinTheme`colors.neutral.600`,
-        },
-        divider: twinTheme`colors.neutral.300`,
-        text: {
-          primary: twinTheme`colors.gray.100`,
-          secondary: twinTheme`colors.gray.300`,
-        },
-        background: {
-          default: twinTheme`colors.neutral.DEFAULT`,
-          paper: twinTheme`colors.neutral.DEFAULT`
-        },
+          primary: {
+            main: twinTheme`colors.neutral.200`,
+            light: twinTheme`colors.neutral.100`,
+            dark: twinTheme`colors.neutral.300`,
+          },
+          secondary: {
+            main: twinTheme`colors.neutral.500`,
+            light: twinTheme`colors.neutral.400`,
+            dark: twinTheme`colors.neutral.600`,
+          },
+          divider: twinTheme`colors.neutral.300`,
+          text: {
+            primary: twinTheme`colors.gray.100`,
+            secondary: twinTheme`colors.gray.300`,
+          },
+          background: {
+            default: twinTheme`colors.neutral.DEFAULT`,
+            paper: twinTheme`colors.neutral.DEFAULT`,
+          },
         }),
   },
 
@@ -149,35 +149,43 @@ export const overrides = (theme: Theme): Components => ({
     },
   },
   MuiButton: {
-  defaultProps: {
+    defaultProps: {
       disableElevation: true,
-      variant: 'contained'
+      variant: 'contained',
     },
     styleOverrides: {
       root: {
-        padding: theme.spacing(0.5, 2),
+        padding: theme.spacing(0.5, 2.5),
         transition: 'opacity 250ms ease-in-out',
         fontWeight: theme.typography.fontWeightMedium,
       },
       contained: {
         borderRadius: twinTheme`borderRadius.full`,
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.primary.dark,
+        color: theme.palette.common.white,
+        backgroundColor: theme.palette.text.primary,
         '&:hover': {
           opacity: 0.8,
-          backgroundColor: theme.palette.primary.dark,
-        }
+          backgroundColor: theme.palette.text.primary,
+        },
       },
       outlined: {
         borderRadius: twinTheme`borderRadius.full`,
         color: theme.palette.text.primary,
         backgroundColor: 'inherit',
-        border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
+        border: `1px solid ${
+          theme.palette.mode === 'dark'
+            ? theme.palette.text.secondary
+            : theme.palette.secondary.light
+        }`,
         '&:hover': {
           opacity: 0.8,
           backgroundColor: 'inherit',
-          border: `1px solid ${theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.secondary.light}`,
-        }
+          border: `1px solid ${
+            theme.palette.mode === 'dark'
+              ? theme.palette.text.secondary
+              : theme.palette.secondary.light
+          }`,
+        },
       },
       text: {
         borderRadius: twinTheme`borderRadius.full`,
@@ -186,25 +194,26 @@ export const overrides = (theme: Theme): Components => ({
         '&:hover': {
           opacity: 0.8,
           backgroundColor: 'inherit',
-        }
-      }
-    }
+        },
+      },
+    },
   },
   MuiIconButton: {
     styleOverrides: {
       root: {
-        backgroundColor: theme.palette.primary.dark,
-      }
-    }
+        backgroundColor:
+          theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main,
+      },
+    },
   },
   MuiRadio: {
     styleOverrides: {
       root: {
         '&.Mui-checked': {
-          color: theme.palette.text.primary
-        }
-      }
-    }
+          color: theme.palette.text.primary,
+        },
+      },
+    },
   },
   MuiAlert: {
     variants: [
@@ -230,7 +239,7 @@ export const overrides = (theme: Theme): Components => ({
         alignItems: 'center',
         '& .MuiButtonBase-root': {
           backgroundColor: twinTheme`colors.neutral.500`,
-        }
+        },
       },
       standardSuccess: {
         color: theme.palette.grey[800],
@@ -246,6 +255,140 @@ export const overrides = (theme: Theme): Components => ({
       },
       action: {
         paddingTop: 0,
+      },
+    },
+  },
+  MuiInput: {
+    styleOverrides: {
+      underline: {
+        '&:before': {
+          borderBottom:
+            theme.palette.mode === 'dark'
+              ? `1px solid ${theme.palette.primary.light}`
+              : `1px solid ${theme.palette.secondary.light}`,
+        },
+        '&:hover:not(.Mui-disabled):before': {
+          borderBottom:
+            theme.palette.mode === 'dark'
+              ? `1px solid ${theme.palette.primary.main}`
+              : `1px solid ${theme.palette.secondary.main}`,
+        },
+        '&:after': {
+          borderBottom: `1px solid ${theme.palette.text.primary}`,
+        },
+      },
+    },
+  },
+  MuiOutlinedInput: {
+    styleOverrides: {
+      root: {
+        '& .MuiOutlinedInput-notchedOutline': {
+          borderColor:
+            theme.palette.mode === 'dark'
+              ? theme.palette.primary.light
+              : theme.palette.secondary.light,
+        },
+        '&:hover .MuiOutlinedInput-notchedOutline': {
+          borderColor:
+            theme.palette.mode === 'dark'
+              ? theme.palette.primary.main
+              : theme.palette.secondary.main,
+        },
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor:
+            theme.palette.mode === 'dark'
+              ? theme.palette.primary.light
+              : theme.palette.secondary.light,
+        },
+      },
+    },
+  },
+  MuiInputLabel: {
+    styleOverrides: {
+      root: {
+        color:
+          theme.palette.mode === 'dark' ? theme.palette.text.primary : theme.palette.secondary.main,
+        '&.Mui-focused': {
+          color:
+            theme.palette.mode === 'dark'
+              ? theme.palette.text.primary
+              : theme.palette.secondary.main,
+        },
+      },
+    },
+  },
+  MuiCheckbox: {
+    styleOverrides: {
+      root: {
+        color:
+          theme.palette.mode === 'dark'
+            ? theme.palette.text.secondary
+            : theme.palette.secondary.main,
+        '&.Mui-checked': {
+          color:
+            theme.palette.mode === 'dark'
+              ? theme.palette.text.secondary
+              : theme.palette.secondary.main,
+        },
+      },
+    },
+  },
+  MuiToolbar: {
+    styleOverrides: {
+      root: {
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? theme.palette.secondary.light
+            : `${theme.palette.primary.light} !important`,
+      },
+    },
+  },
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        borderColor:
+          theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main,
+      },
+    },
+  },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        '&.MuiPaper-root': {
+          backgroundColor:
+            theme.palette.mode === 'dark'
+              ? theme.palette.secondary.light
+              : theme.palette.primary.light,
+        },
+      },
+    },
+  },
+  MuiListSubheader: {
+    styleOverrides: {
+      root: {
+        color: theme.palette.text.primary,
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? theme.palette.secondary.light
+            : theme.palette.primary.main,
+      },
+    },
+  },
+  MuiTooltip: {
+    styleOverrides: {
+      tooltip: {
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? `${theme.palette.primary.dark} !important`
+            : theme.palette.secondary.main,
+        boxShadow: `rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset`,
+      },
+      tooltipArrow: {
+        backgroundColor:
+          theme.palette.mode === 'dark'
+            ? `${theme.palette.primary.dark} !important`
+            : theme.palette.secondary.main,
+        boxShadow: `rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset`,
       },
     },
   },
