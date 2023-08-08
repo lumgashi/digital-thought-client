@@ -8,11 +8,11 @@ import { useNotification } from './NotificationProvider';
 
 interface AuthContextValue {
   user?: User;
-  userProfile?: ProfileTypes;
+  userRole?: ProfileTypes;
   isAuthenticated: boolean;
   isInitializing: boolean;
   error: any;
-  setUserProfile: React.Dispatch<React.SetStateAction<ProfileTypes | undefined>>;
+  setUserRole: React.Dispatch<React.SetStateAction<ProfileTypes | undefined>>;
   login: (email: string, password: string) => Promise<any>;
   logout: () => void;
   mutateUser: (
@@ -25,7 +25,7 @@ export const AuthContext = React.createContext<AuthContextValue>({
   isAuthenticated: false,
   isInitializing: true,
   error: null,
-  setUserProfile: () => {},
+  setUserRole: () => {},
   login: async () => {},
   logout: async () => {},
   mutateUser: async () => undefined,
@@ -41,33 +41,33 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const { openSnackbar } = useNotification();
 
   const { data: user, mutate: mutateUser, error, isValidating } = useSWR<User>('auth');
-  const [userProfile, setUserProfile] = React.useState<ProfileTypes>();
+  const [userRole, setUserRole] = React.useState<ProfileTypes>();
 
   React.useEffect(() => {
-    if (!isValidating && user?.isLoggedIn && user?.allowedProfiles) {
+    if (!isValidating && user?.isLoggedIn) {
       const profileFromStorage = window.localStorage.getItem('userProfile') ?? undefined;
 
       if (profileFromStorage) {
-        setUserProfile((profileFromStorage as ProfileTypes) ?? 4);
+        setUserRole(profileFromStorage as ProfileTypes);
       } else {
-        setUserProfile(user?.profile);
+        setUserRole(user?.role);
       }
     }
-  }, [isValidating, user?.allowedProfiles, user?.isLoggedIn, user?.profile]);
+  }, [isValidating, user?.allowedProfiles, user?.isLoggedIn, user?.role]);
 
   React.useEffect(() => {
-    if (userProfile) {
-      window.localStorage.setItem('userProfile', userProfile.toString());
+    if (userRole) {
+      window.localStorage.setItem('userProfile', userRole.toString());
     }
-  }, [userProfile]);
+  }, [userRole]);
 
   const login = React.useCallback(
     async (email: string, password: string): Promise<void> => {
       try {
         const data: User = await Api.post('login', { email, password });
-        const profile = data?.profile ? data?.profile : undefined;
+        const role = data?.role ? data?.role : undefined;
 
-        setUserProfile(profile);
+        setUserRole(role);
         await mutateUser(data, false);
       } catch (err) {
         mutateUser({ isLoggedIn: false }, false);
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     try {
       const response = await Api.delete('auth');
       mutateUser(response, false);
-      setUserProfile(undefined);
+      setUserRole(undefined);
       window.localStorage.removeItem('userProfile');
 
       openSnackbar('Logged out successfully');
@@ -93,11 +93,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const value = {
     user,
-    userProfile,
+    userRole,
     isAuthenticated: Boolean(user?.isLoggedIn),
     isInitializing: Boolean(!user && !error), // App is initialising, reloading, refreshing.
     error,
-    setUserProfile,
+    setUserRole,
     login,
     logout,
     mutateUser,
