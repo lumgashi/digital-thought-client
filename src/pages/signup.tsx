@@ -1,12 +1,12 @@
 import GuestGuard from '@/components/Guards/GuestGuard';
 import Layout from '@/components/Layout';
-import LoginForm from '@/components/Login';
+import { SignupComponent } from '@/components/Signup';
 
-export default function Login() {
+export default function Signup() {
   return (
     <GuestGuard>
       <Layout spacing={3} maxWidth="xs">
-        <LoginForm />
+        <SignupComponent />
       </Layout>
     </GuestGuard>
   );
