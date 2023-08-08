@@ -1,4 +1,3 @@
-
 export async function fetchJson(...args: [input: RequestInfo, init?: RequestInit | undefined]) {
   try {
     const headers: HeadersInit = new Headers(args[1]?.headers);
