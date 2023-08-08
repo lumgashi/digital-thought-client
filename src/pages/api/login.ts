@@ -1,4 +1,5 @@
 import getConfig from 'next/config';
+import jwt_decode from 'jwt-decode';
 
 import withSessionRoute from '@/lib/withSession';
 import { fetchJson } from '@/lib/api';
@@ -12,16 +13,22 @@ export default withSessionRoute(async (req, res) => {
 
   if (req.method === 'POST') {
     const body = await req.body;
-    const url = `${baseUrl}/login`;
+    const url = `${baseUrl}/api/auth/login`;
 
     try {
-      const { token, ...otherData } = await fetchJson(url, {
+      const { data } = await fetchJson(url, {
         body: JSON.stringify(body),
         method: 'POST',
       });
-      const user = { isLoggedIn: true, ...otherData };
 
-      req.session.token = token;
+      const { accessToken } = data;
+      const userData: any = jwt_decode(accessToken);
+
+      const { email, role } = userData;
+      const user = { isLoggedIn: true, accessToken, email, role };
+
+      req.session.accessToken = user.accessToken;
+      req.session.userData = { email, role };
       await req.session.save();
 
       return res.json(user);
