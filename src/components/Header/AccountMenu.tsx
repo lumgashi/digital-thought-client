@@ -20,6 +20,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 import { useColorMode } from '@/providers/ColorModeProvider';
 import theme from '@/config/theme';
+import { useAuth } from '@/providers/AuthProvider';
 
 type SettingType = {
   id: number;
@@ -29,18 +30,16 @@ type SettingType = {
 };
 
 const settings: SettingType[] = [
-  // { id: 1, label: 'Display', icon: <DarkModeIcon fontSize="small" /> },
-  { id: 2, label: 'Log Out', icon: <LogoutIcon fontSize="small" /> },
+  { id: 1, label: 'Log Out', icon: <LogoutIcon fontSize="small" /> },
 ];
 
 export default function AccountMenu() {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  // const [colorModeOpen, setColorModeOpen] = React.useState(false);
-
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const { logout } = useAuth();
   const { colorMode, handleColorModeChange } = useColorMode();
-  // const { openSnackbar } = useNotification();
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -52,26 +51,15 @@ export default function AccountMenu() {
 
   const handleClickUserMenu = (option?: number) => {
     if (option === 1) {
-      // setColorModeOpen(true);
-    } else if (option === 2) {
-      //   logout();
+      logout();
     }
 
     setAnchorElUser(null);
   };
 
-  // const handleCloseColorMode = () => {
-  //   setColorModeOpen(false);
-  // };
-
-  // const handleColorModeSuccess = (color: ColorModeType) => {
-  //   setColorModeOpen(false);
-  //   openSnackbar(color === 'dark' ? 'Dark Mode is on' : 'Dark Mode is off');
-  // };
-
   return (
     <>
-      <Tooltip title="Account Settings" arrow>
+      <Tooltip title="Account Settings">
         <IconButton
           onClick={handleOpenUserMenu}
           size={isMobile ? 'small' : 'medium'}
@@ -100,7 +88,7 @@ export default function AccountMenu() {
         open={Boolean(anchorElUser)}
         onClose={handleClose}
       >
-        <ListSubheader tw="uppercase">Account Settings</ListSubheader>
+        <ListSubheader>Account Settings</ListSubheader>
         <Divider tw="my-2" />
         <ListItem
           disablePadding
@@ -119,10 +107,7 @@ export default function AccountMenu() {
             </Typography>
           </ListItemText>
 
-          <Tooltip
-            title={colorMode === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            arrow
-          >
+          <Tooltip title={colorMode === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}>
             <IconButton
               size="small"
               onClick={() =>

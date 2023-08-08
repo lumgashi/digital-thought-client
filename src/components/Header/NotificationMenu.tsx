@@ -41,7 +41,7 @@ export default function NotificationMenu() {
 
   return (
     <>
-      <Tooltip title="Notifications" arrow>
+      <Tooltip title="Notifications">
         <IconButton
           sx={{
             borderRadius: '100%',
@@ -74,7 +74,7 @@ export default function NotificationMenu() {
           open={Boolean(anchorElNotification)}
           onClose={handleClose}
         >
-          <ListSubheader tw="uppercase">Notifications</ListSubheader>
+          <ListSubheader>Notifications</ListSubheader>
           <Divider tw="my-2" />
           {notifications.map((notification, index) => (
             <MenuItem key={index} onClick={handleClose} tw="flex flex-row justify-between">

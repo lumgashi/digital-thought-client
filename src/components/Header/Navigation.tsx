@@ -6,17 +6,17 @@ import { useColorMode } from '@/providers/ColorModeProvider';
 import { navigationItems } from '@/utils/navigation';
 
 type NavLinkProps = {
-  active?: boolean;
-  darkMode?: boolean;
+  selected?: boolean;
+  darkmode?: any;
 };
 
-const NavLink = styled(Link)<NavLinkProps>(({ active, darkMode }) => [
-  tw`inline-block relative`,
+const NavLink = styled(Link)<NavLinkProps>(({ selected, darkmode }) => [
+  tw`inline-block relative text-gray-500 after:(bg-gray-500)`,
   tw`after:(absolute content block w-2/5 h-0.5 left-1/2 transform -translate-x-1/2 scale-x-0 transition-transform)`,
-  !active && tw`hover:after:scale-x-100`,
-  active && tw`after:(scale-x-100)`,
-  !darkMode && tw`text-gray-500 after:(bg-gray-500)`,
-  darkMode && tw`text-white/80 after:(bg-white/80)`,
+  !selected && tw`hover:after:scale-x-100`,
+  selected && tw`after:(scale-x-100)`,
+  !darkmode && tw`text-gray-500 after:(bg-gray-500)`,
+  darkmode && tw`text-white/80 after:(bg-white/80)`,
 ]);
 
 export default function Navigation() {
@@ -25,13 +25,13 @@ export default function Navigation() {
   const { colorMode } = useColorMode();
 
   return (
-    <nav tw="text-white uppercase text-opacity-0 font-bold text-base ml-0 lg:(ml-4 mt-0) space-x-3">
+    <nav tw="text-white uppercase text-opacity-0 font-semibold text-sm ml-0 lg:(ml-4 mt-0) space-x-3">
       {navigationItems.map((item) => (
         <NavLink
           key={item.id}
           href={item.href}
-          active={router.pathname === item.href}
-          darkMode={colorMode === 'dark'}
+          selected={router.pathname === item.href}
+          darkmode={colorMode === 'dark' ? 1 : 0}
         >
           {item.title}
         </NavLink>

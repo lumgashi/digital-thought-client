@@ -20,6 +20,7 @@ import { theme as twinTheme } from 'twin.macro';
 import theme from '@/config/theme';
 import { navigationItems } from '@/utils/navigation';
 import { useColorMode } from '@/providers/ColorModeProvider';
+import { useAuth } from '@/providers/AuthProvider';
 
 import NotificationMenu from './NotificationMenu';
 import AccountMenu from './AccountMenu';
@@ -38,6 +39,7 @@ export default function MobileHeader() {
 
   const [open, setOpen] = React.useState<boolean>(false);
 
+  const { isAuthenticated } = useAuth();
   const { colorMode } = useColorMode();
 
   const handleDrawerOpen = () => {
@@ -60,8 +62,12 @@ export default function MobileHeader() {
           <span>LOGO HERE</span>
 
           <div tw="flex flex-row items-center justify-center space-x-1">
-            <NotificationMenu />
-            <AccountMenu />
+            {isAuthenticated && (
+              <div tw="flex flex-row items-center space-x-1">
+                <NotificationMenu />
+                <AccountMenu />
+              </div>
+            )}
             <Tooltip title="Menu" arrow>
               <IconButton
                 size="small"
@@ -127,16 +133,20 @@ export default function MobileHeader() {
 
             <Divider tw="my-2" />
 
-            <ListItem onClick={() => router.push('/login')}>
-              <ListItemText>
-                <Typography tw="text-lg font-bold">Login</Typography>
-              </ListItemText>
-            </ListItem>
-            <ListItem onClick={() => router.push('/signup')}>
-              <ListItemText>
-                <Typography tw="text-lg font-bold">Sign up</Typography>
-              </ListItemText>
-            </ListItem>
+            {!isAuthenticated && (
+              <>
+                <ListItem onClick={() => router.push('/login')}>
+                  <ListItemText>
+                    <Typography tw="text-lg font-bold">Login</Typography>
+                  </ListItemText>
+                </ListItem>
+                <ListItem onClick={() => router.push('/signup')}>
+                  <ListItemText>
+                    <Typography tw="text-lg font-bold">Sign up</Typography>
+                  </ListItemText>
+                </ListItem>
+              </>
+            )}
           </List>
         </Drawer>
       </div>
