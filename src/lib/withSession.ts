@@ -1,13 +1,15 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
+import JWToken from '@/interfaces/jwt.interface';
+
 export type NextIronHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>;
 export type IronHandler = (req: NextApiRequest, res: NextApiResponse) => void | Promise<void>;
 
 declare module 'iron-session' {
   interface IronSessionData {
     accessToken: string;
-    user?: any;
+    userData?: JWToken;
   }
 }
 

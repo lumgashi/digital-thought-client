@@ -8,7 +8,7 @@ export enum ProfileTypes {
 export interface User {
   email?: string;
   password?: string;
-  profile?: ProfileTypes;
+  role?: ProfileTypes;
   isLoggedIn?: boolean;
   isVerified?: boolean;
   allowedProfiles?: number[] | undefined;
