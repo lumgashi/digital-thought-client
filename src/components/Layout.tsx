@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, spacing = 0, maxWidth = 'lg' }: LayoutProps) {
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('xl'));
 
   return (
     <div tw="flex flex-col h-screen">
@@ -20,7 +20,7 @@ export default function Layout({ children, spacing = 0, maxWidth = 'lg' }: Layou
       <Container
         disableGutters
         tw="flex-grow"
-        sx={[spacing > 0 && { padding: theme.spacing(spacing, isMobile ? 2 : 0) }]}
+        sx={[spacing > 0 && { padding: theme.spacing(spacing, isDesktop ? 0 : 2) }]}
         maxWidth={maxWidth}
       >
         {children}
