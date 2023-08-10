@@ -5,7 +5,7 @@ import { SignupComponent } from '@/components/Signup';
 export default function Signup() {
   return (
     <GuestGuard>
-      <Layout spacing={3} maxWidth="xs">
+      <Layout spacing={8} maxWidth="sm">
         <SignupComponent />
       </Layout>
     </GuestGuard>

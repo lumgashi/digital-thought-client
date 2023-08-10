@@ -10,6 +10,7 @@ import PasswordInputController from '@/components/Forms/PasswordInputController'
 import LinkButton from '@/components/LinkButton';
 import { useAuth } from '@/providers/AuthProvider';
 import { ProfileTypes } from '@/interfaces/user.interface';
+import EntryLayout from '@/components/Common/EntryLayout';
 
 import { LoginFields, loginSchema } from './schema';
 
@@ -20,7 +21,7 @@ type LoginProps = {
 export default function LoginForm({ onClick }: LoginProps) {
   const router = useRouter();
 
-  const { login, userProfile, isInitializing } = useAuth();
+  const { login, userRole, isInitializing } = useAuth();
 
   const {
     control,
@@ -38,9 +39,9 @@ export default function LoginForm({ onClick }: LoginProps) {
     try {
       await login(data.email, data.password);
 
-      if (userProfile === ProfileTypes.ADMIN) {
+      if (userRole === ProfileTypes.ADMIN) {
         router.push('/backoffice');
-      } else if (userProfile === ProfileTypes.AUTHOR) {
+      } else if (userRole === ProfileTypes.AUTHOR) {
         router.push('/author');
       } else {
         router.push('/');
@@ -52,66 +53,68 @@ export default function LoginForm({ onClick }: LoginProps) {
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
-      <Grid container spacing={1} my={4}>
-        <Grid item xs={12}>
-          <Typography variant="h2">Welcome back!</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="body1">
-            Please enter your credentials to access your account.
-          </Typography>
-        </Grid>
-        <Grid item container xs={12} spacing={2} mt={1}>
-          <Grid item container xs={12}>
-            <Grid item xs={12}>
-              <InputLabel>Email</InputLabel>
-            </Grid>
-            <Grid item xs={12}>
-              <InputController
-                control={control}
-                errors={errors}
-                placeholder="john@email.com"
-                name="email"
-                autoFocus
-                disabled={isInitializing}
-                sx={{ mt: 1 }}
-              />
-            </Grid>
+      <EntryLayout>
+        <Grid container spacing={1}>
+          <Grid item xs={12}>
+            <Typography variant="h2">Welcome back!</Typography>
           </Grid>
-          <Grid item container xs={12}>
-            <Grid item xs={12}>
-              <InputLabel>Password</InputLabel>
-            </Grid>
-            <Grid item xs={12}>
-              <PasswordInputController
-                control={control}
-                errors={errors}
-                placeholder="***********"
-                name="password"
-                disabled={isInitializing}
-                sx={{ mt: 1 }}
-              />
-            </Grid>
+          <Grid item xs={12}>
+            <Typography variant="body1">
+              Please enter your credentials to access your account.
+            </Typography>
           </Grid>
-          <Grid item container xs={12} flexDirection="row" justifyContent="flex-end">
-            <Grid item>
-              <Button variant="text" tw="normal-case text-sm opacity-75" onClick={onClick}>
-                Forgot password?
+          <Grid item container xs={12} spacing={2} mt={1}>
+            <Grid item container xs={12}>
+              <Grid item xs={12}>
+                <InputLabel>Email</InputLabel>
+              </Grid>
+              <Grid item xs={12}>
+                <InputController
+                  control={control}
+                  errors={errors}
+                  placeholder="john@email.com"
+                  name="email"
+                  autoFocus
+                  disabled={isInitializing}
+                  sx={{ mt: 1 }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container xs={12}>
+              <Grid item xs={12}>
+                <InputLabel>Password</InputLabel>
+              </Grid>
+              <Grid item xs={12}>
+                <PasswordInputController
+                  control={control}
+                  errors={errors}
+                  placeholder="***********"
+                  name="password"
+                  disabled={isInitializing}
+                  sx={{ mt: 1 }}
+                />
+              </Grid>
+            </Grid>
+            <Grid item container xs={12} flexDirection="row" justifyContent="flex-end">
+              <Grid item>
+                <Button variant="text" tw="normal-case text-sm opacity-75" onClick={onClick}>
+                  Forgot password?
+                </Button>
+              </Grid>
+            </Grid>
+            <Grid item xs={12}>
+              <Button type="submit" fullWidth endIcon={<LoginIcon />}>
+                Login
               </Button>
             </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Button type="submit" fullWidth endIcon={<LoginIcon />}>
-              Login
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <LinkButton href="/signup" variant="text" tw="normal-case text-sm opacity-75">
-              Not a member? Sign up
-            </LinkButton>
+            <Grid item xs={12}>
+              <LinkButton href="/signup" variant="text" tw="normal-case text-sm opacity-75">
+                Not a member? Sign up
+              </LinkButton>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </EntryLayout>
     </form>
   );
 }

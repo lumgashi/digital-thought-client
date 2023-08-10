@@ -12,7 +12,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, spacing = 0, maxWidth = 'lg' }: LayoutProps) {
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <div tw="flex flex-col h-screen">

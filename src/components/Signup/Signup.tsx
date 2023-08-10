@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Container, Grid, InputLabel, Typography } from '@mui/material';
+import { Button, Grid, InputLabel, Typography } from '@mui/material';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 import useFormErrors from '@/hooks/useFormErrors';
@@ -11,6 +11,7 @@ import InputController from '@/components/Forms/InputController';
 import PasswordInputController from '@/components/Forms/PasswordInputController';
 import CheckboxController from '@/components/Forms/CheckboxController';
 import LinkButton from '@/components/LinkButton';
+import EntryLayout from '@/components/Common/EntryLayout';
 
 import { schema, SignupFields } from './schema';
 
@@ -45,8 +46,8 @@ export default function Signup() {
   };
 
   return (
-    <Container disableGutters sx={{ my: 4 }}>
-      <form onSubmit={handleSubmit(submitForm)}>
+    <form onSubmit={handleSubmit(submitForm)}>
+      <EntryLayout>
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Typography variant="h2">Register now</Typography>
@@ -119,7 +120,7 @@ export default function Signup() {
             </LinkButton>
           </Grid>
         </Grid>
-      </form>
-    </Container>
+      </EntryLayout>
+    </form>
   );
 }
