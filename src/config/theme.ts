@@ -162,10 +162,12 @@ export const overrides = (theme: Theme): Components => ({
       contained: {
         borderRadius: twinTheme`borderRadius.full`,
         color: theme.palette.common.white,
-        backgroundColor: theme.palette.text.primary,
+        backgroundColor:
+          theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.text.primary,
         '&:hover': {
           opacity: 0.8,
-          backgroundColor: theme.palette.text.primary,
+          backgroundColor:
+            theme.palette.mode === 'dark' ? theme.palette.primary.main : theme.palette.text.primary,
         },
       },
       outlined: {
@@ -347,7 +349,7 @@ export const overrides = (theme: Theme): Components => ({
     styleOverrides: {
       root: {
         borderColor:
-          theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.main,
+          theme.palette.mode === 'dark' ? theme.palette.primary.dark : theme.palette.primary.dark,
       },
     },
   },

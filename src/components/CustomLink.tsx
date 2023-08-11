@@ -18,7 +18,7 @@ export default function CustomLink({ children, ...allProps }: React.PropsWithChi
 
   if (internal) {
     return (
-      <Link {...allProps} href={href} passHref>
+      <Link {...props} {...allProps} href={href} passHref>
         {children}
       </Link>
     );
