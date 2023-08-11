@@ -11,49 +11,49 @@ export default class MyDocument extends Document {
           {process.env.BUILD_ENV === 'development' && <meta name="robots" content="none" />}
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-Light-300.woff2"
+            href="/fonts/SFNSText-Light-300.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-Regular-400.woff2"
+            href="/fonts/SFNSText-Regular-400.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-Medium-500.woff2"
+            href="/fonts/SFNSText-Medium-500.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-SemiBold-600.woff2"
+            href="/fonts/SFNSText-SemiBold-600.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-Bold-700.woff2"
+            href="/fonts/SFNSText-Bold-700.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-ExtraBold-800.woff2"
+            href="/fonts/SFNSText-ExtraBold-800.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"
           />
           <link
             rel="prefetch"
-            href="/fonts/NotoSans-Black-900.woff2"
+            href="/fonts/SFNSText-Black-900.woff2"
             as="font"
             type="font/woff2"
             crossOrigin="anonymous"

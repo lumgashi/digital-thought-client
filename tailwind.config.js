@@ -8,7 +8,7 @@ module.exports = {
   },
   theme: {
     fontFamily: {
-      sans: ['Noto Sans', ...defaultTheme.fontFamily.sans],
+      sans: ['San Francisco', ...defaultTheme.fontFamily.sans],
     },
     extend: {
       colors: {
